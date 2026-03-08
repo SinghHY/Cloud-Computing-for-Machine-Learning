@@ -50,3 +50,26 @@ plt.ylabel("Temperature")
 plt.title("PID Temperature Control")
 plt.legend()
 plt.show()
+
+
+temp_array = np.array(temp_history)
+
+# Overshoot
+max_temp = np.max(temp_array)
+overshoot = ((max_temp-setpoint)/setpoint)*100
+
+# Settling time
+tolerance = 0.02*setpoint
+settling_time = None
+
+for i in range(len(temp_array)):
+    if np.all(np.abs(temp_array[i:] - setpoint) < tolerance):
+        settling_time = time[i]
+        break
+
+# steady-state error
+steady_state_error = abs(temp_array[-1] - setpoint)
+
+print("Overshoot:",overshoot,"%")
+print("Settling Time:",settling_time)
+print("Steady State Error:",steady_state_error)

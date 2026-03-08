@@ -20,3 +20,9 @@ pred = model.predict(X_test)
 score = r2_score(y_test,pred)
 
 print("Model Accuracy (R2):",score)
+
+sample = [[2.1, 1.3, 4.2]]
+
+predicted_gains = model.predict(sample)
+
+print("Predicted PID:", predicted_gains)
